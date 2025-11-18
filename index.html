@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Automation - Intelligent Workflow Automation</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-robot"></i>
+                    <span>Task Automation AI</span>
+                </div>
+                <div class="header-actions">
+                    <button class="analytics-btn" onclick="showAnalytics()">
+                        <i class="fas fa-chart-bar"></i>
+                        Analytics
+                    </button>
+                    <button class="theme-toggle" onclick="toggleTheme()">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Section -->
+            <section class="dashboard-section">
+                <div class="dashboard-header">
+                    <h2><i class="fas fa-tachometer-alt"></i> Automation Dashboard</h2>
+                    <div class="dashboard-stats">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-tasks"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalTasks">0</h3>
+                                <p>Total Tasks</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-play-circle"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="activeAutomations">0</h3>
+                                <p>Active</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="completedToday">0</h3>
+                                <p>Completed Today</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="timeSaved">0h</h3>
+                                <p>Time Saved</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
+                    <div class="action-buttons">
+                        <button class="action-btn" onclick="createNewTask()">
+                            <i class="fas fa-plus"></i>
+                            Create Task
+                        </button>
+                        <button class="action-btn" onclick="showTemplates()">
+                            <i class="fas fa-copy"></i>
+                            Use Template
+                        </button>
+                        <button class="action-btn" onclick="scheduleTask()">
+                            <i class="fas fa-calendar"></i>
+                            Schedule
+                        </button>
+                        <button class="action-btn" onclick="showWorkflows()">
+                            <i class="fas fa-project-diagram"></i>
+                            Workflows
+                        </button>
+                        <button class="action-btn" onclick="importTasks()">
+                            <i class="fas fa-upload"></i>
+                            Import Tasks
+                        </button>
+                        <button class="action-btn" onclick="exportTasks()">
+                            <i class="fas fa-download"></i>
+                            Export
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Task Creation Section -->
+            <section class="task-creation-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-plus-circle"></i> Create New Automation Task</h2>
+                    <p>Set up automated tasks to streamline your workflow</p>
+                </div>
+
+                <div class="task-form">
+                    <div class="form-tabs">
+                        <button class="tab-btn active" onclick="switchTaskTab('single')">
+                            <i class="fas fa-tasks"></i> Single Task
+                        </button>
+                        <button class="tab-btn" onclick="switchTaskTab('workflow')">
+                            <i class="fas fa-project-diagram"></i> Workflow
+                        </button>
+                        <button class="tab-btn" onclick="switchTaskTab('template')">
+                            <i class="fas fa-file-alt"></i> From Template
+                        </button>
+                    </div>
+
+                    <!-- Single Task Tab -->
+                    <div class="tab-content" id="singleTaskTab">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="taskName">Task Name *</label>
+                                <input type="text" id="taskName" placeholder="Enter task name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="taskCategory">Category *</label>
+                                <select id="taskCategory" required>
+                                    <option value="">Select category</option>
+                                    <option value="email">Email Automation</option>
+                                    <option value="file">File Management</option>
+                                    <option value="data">Data Processing</option>
+                                    <option value="social">Social Media</option>
+                                    <option value="backup">Backup & Sync</option>
+                                    <option value="monitoring">Monitoring</option>
+                                    <option value="reporting">Reporting</option>
+                                    <option value="integration">API Integration</option>
+                                    <option value="custom">Custom</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="taskDescription">Description</label>
+                                <textarea id="taskDescription" rows="3" placeholder="Describe what this task should do..."></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="taskTrigger">Trigger *</label>
+                                <select id="taskTrigger" required>
+                                    <option value="">Select trigger</option>
+                                    <option value="manual">Manual</option>
+                                    <option value="schedule">Schedule</option>
+                                    <option value="event">Event-based</option>
+                                    <option value="webhook">Webhook</option>
+                                    <option value="file-watch">File Watcher</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group" id="scheduleGroup" style="display: none;">
+                                <label for="schedule">Schedule</label>
+                                <div class="schedule-options">
+                                    <select id="scheduleType">
+                                        <option value="once">Once</option>
+                                        <option value="daily">Daily</option>
+                                        <option value="weekly">Weekly</option>
+                                        <option value="monthly">Monthly</option>
+                                        <option value="cron">Custom (Cron)</option>
+                                    </select>
+                                    <input type="datetime-local" id="scheduleTime" style="display: none;">
+                                    <input type="text" id="cronExpression" placeholder="0 0 12 * * *" style="display: none;">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="taskAction">Action Type *</label>
+                                <select id="taskAction" required>
+                                    <option value="">Select action</option>
+                                    <option value="send-email">Send Email</option>
+                                    <option value="process-file">Process File</option>
+                                    <option value="api-call">API Call</option>
+                                    <option value="data-transform">Data Transformation</option>
+                                    <option value="backup">Create Backup</option>
+                                    <option value="notification">Send Notification</option>
+                                    <option value="script">Run Script</option>
+                                    <option value="webhook">Call Webhook</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="taskPriority">Priority</label>
+                                <select id="taskPriority">
+                                    <option value="low">Low</option>
+                                    <option value="medium" selected>Medium</option>
+                                    <option value="high">High</option>
+                                    <option value="critical">Critical</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="taskTags">Tags</label>
+                                <input type="text" id="taskTags" placeholder="Enter tags separated by commas">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="taskRetry">Retry Policy</label>
+                                <select id="taskRetry">
+                                    <option value="none">No Retry</option>
+                                    <option value="linear">Linear Backoff</option>
+                                    <option value="exponential">Exponential Backoff</option>
+                                    <option value="custom">Custom</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="taskTimeout">Timeout (seconds)</label>
+                                <input type="number" id="taskTimeout" min="30" value="300">
+                            </div>
+                        </div>
+
+                        <!-- Advanced Settings -->
+                        <div class="advanced-settings">
+                            <h4><i class="fas fa-cog"></i> Advanced Settings</h4>
+                            <div class="setting-group">
+                                <label>
+                                    <input type="checkbox" id="enableLogging" checked>
+                                    Enable detailed logging
+                                </label>
+                            </div>
+                            <div class="setting-group">
+                                <label>
+                                    <input type="checkbox" id="enableNotifications">
+                                    Send notifications on completion
+                                </label>
+                            </div>
+                            <div class="setting-group">
+                                <label>
+                                    <input type="checkbox" id="enableRetry">
+                                    Enable automatic retry on failure
+                                </label>
+                            </div>
+                            <div class="setting-group">
+                                <label>
+                                    <input type="checkbox" id="enableDependencies">
+                                    Task depends on other tasks
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Action Configuration -->
+                        <div class="action-config" id="actionConfig">
+                            <h4><i class="fas fa-sliders-h"></i> Action Configuration</h4>
+                            <div id="actionConfigContent">
+                                <p>Select an action type to configure its parameters</p>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="btn btn-secondary" onclick="clearForm()">
+                                <i class="fas fa-times"></i> Clear
+                            </button>
+                            <button class="btn btn-primary" onclick="saveTask()">
+                                <i class="fas fa-save"></i> Save Task
+                            </button>
+                            <button class="btn btn-success" onclick="testTask()">
+                                <i class="fas fa-play"></i> Test Run
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Workflow Tab -->
+                    <div class="tab-content" id="workflowTab" style="display: none;">
+                        <div class="workflow-builder">
+                            <h3><i class="fas fa-sitemap"></i> Workflow Builder</h3>
+                            <div class="workflow-canvas" id="workflowCanvas">
+                                <div class="workflow-placeholder">
+                                    <i class="fas fa-project-diagram"></i>
+                                    <p>Drag and drop tasks to create your workflow</p>
+                                    <button class="btn btn-primary" onclick="addWorkflowStep()">
+                                        <i class="fas fa-plus"></i> Add First Step
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="workflow-controls">
+                                <button class="btn btn-secondary" onclick="saveWorkflow()">
+                                    <i class="fas fa-save"></i> Save Workflow
+                                </button>
+                                <button class="btn btn-primary" onclick="testWorkflow()">
+                                    <i class="fas fa-play"></i> Test Workflow
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Template Tab -->
+                    <div class="tab-content" id="templateTab" style="display: none;">
+                        <div class="template-gallery">
+                            <h3><i class="fas fa-folder-open"></i> Task Templates</h3>
+                            <div class="template-grid" id="templateGrid">
+                                <div class="template-card" onclick="useTemplate('email-digest')">
+                                    <div class="template-icon">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <h4>Email Digest</h4>
+                                    <p>Send daily/weekly email summaries</p>
+                                    <span class="template-badge popular">Popular</span>
+                                </div>
+                                <div class="template-card" onclick="useTemplate('file-backup')">
+                                    <div class="template-icon">
+                                        <i class="fas fa-save"></i>
+                                    </div>
+                                    <h4>File Backup</h4>
+                                    <p>Automated file and folder backups</p>
+                                </div>
+                                <div class="template-card" onclick="useTemplate('data-sync')">
+                                    <div class="template-icon">
+                                        <i class="fas fa-sync"></i>
+                                    </div>
+                                    <h4>Data Synchronization</h4>
+                                    <p>Sync data between systems</p>
+                                </div>
+                                <div class="template-card" onclick="useTemplate('report-generation')">
+                                    <div class="template-icon">
+                                        <i class="fas fa-chart-bar"></i>
+                                    </div>
+                                    <h4>Report Generation</h4>
+                                    <p>Automated report creation</p>
+                                </div>
+                                <div class="template-card" onclick="useTemplate('social-post')">
+                                    <div class="template-icon">
+                                        <i class="fab fa-twitter"></i>
+                                    </div>
+                                    <h4>Social Media Post</h4>
+                                    <p>Scheduled social media updates</p>
+                                </div>
+                                <div class="template-card" onclick="useTemplate('monitoring')">
+                                    <div class="template-icon">
+                                        <i class="fas fa-heartbeat"></i>
+                                    </div>
+                                    <h4>System Monitoring</h4>
+                                    <p>Monitor system health and performance</p>
+                                </div>
+                                <div class="template-card" onclick="useTemplate('cleanup')">
+                                    <div class="template-icon">
+                                        <i class="fas fa-broom"></i>
+                                    </div>
+                                    <h4>Cleanup Tasks</h4>
+                                    <p>Automated cleanup and maintenance</p>
+                                </div>
+                                <div class="template-card" onclick="useTemplate('api-integration')">
+                                    <div class="template-icon">
+                                        <i class="fas fa-plug"></i>
+                                    </div>
+                                    <h4>API Integration</h4>
+                                    <p>Connect external services</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Task List Section -->
+            <section class="task-list-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-list"></i> Active Tasks</h2>
+                    <div class="list-controls">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="taskSearch" placeholder="Search tasks...">
+                        </div>
+                        <select id="filterCategory">
+                            <option value="">All Categories</option>
+                            <option value="email">Email Automation</option>
+                            <option value="file">File Management</option>
+                            <option value="data">Data Processing</option>
+                            <option value="social">Social Media</option>
+                            <option value="backup">Backup & Sync</option>
+                        </select>
+                        <select id="filterStatus">
+                            <option value="">All Status</option>
+                            <option value="active">Active</option>
+                            <option value="paused">Paused</option>
+                            <option value="completed">Completed</option>
+                            <option value="failed">Failed</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="task-list" id="taskList">
+                    <!-- Tasks will be populated here -->
+                </div>
+            </section>
+        </main>
+
+        <!-- Analytics Modal -->
+        <div class="modal" id="analyticsModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-chart-bar"></i> Automation Analytics</h3>
+                    <button class="close-btn" onclick="closeModal('analyticsModal')">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="analytics-period">
+                        <select id="analyticsPeriod">
+                            <option value="today">Today</option>
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                            <option value="year">This Year</option>
+                        </select>
+                    </div>
+
+                    <div class="analytics-grid">
+                        <div class="analytics-card">
+                            <h4>Task Execution</h4>
+                            <canvas id="executionChart"></canvas>
+                        </div>
+                        <div class="analytics-card">
+                            <h4>Success Rate</h4>
+                            <canvas id="successChart"></canvas>
+                        </div>
+                        <div class="analytics-card">
+                            <h4>Time Saved</h4>
+                            <canvas id="timeChart"></canvas>
+                        </div>
+                        <div class="analytics-card">
+                            <h4>Category Distribution</h4>
+                            <canvas id="categoryChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="performance-metrics">
+                        <h4>Performance Metrics</h4>
+                        <div class="metrics-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Metric</th>
+                                        <th>Value</th>
+                                        <th>Change</th>
+                                        <th>Trend</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="metricsTableBody">
+                                    <tr>
+                                        <td>Average Execution Time</td>
+                                        <td>2.3s</td>
+                                        <td class="positive">-15%</td>
+                                        <td><i class="fas fa-arrow-down text-green"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Success Rate</td>
+                                        <td>96.5%</td>
+                                        <td class="positive">+2.1%</td>
+                                        <td><i class="fas fa-arrow-up text-green"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Daily Tasks</td>
+                                        <td>247</td>
+                                        <td class="positive">+18</td>
+                                        <td><i class="fas fa-arrow-up text-green"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Error Rate</td>
+                                        <td>3.5%</td>
+                                        <td class="positive">-1.2%</td>
+                                        <td><i class="fas fa-arrow-down text-green"></i></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+            <div class="loading-content">
+                <div class="loading-spinner"></div>
+                <h3 id="loadingTitle">Processing Task...</h3>
+                <p id="loadingDescription">Please wait while we set up your automation</p>
+                <div class="loading-progress">
+                    <div class="progress-bar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
