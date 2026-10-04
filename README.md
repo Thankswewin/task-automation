@@ -1,36 +1,40 @@
-# AI-powered Task Automation
+# Task Automation
 
-🤖 **Automate routine reporting and data processing**
+Demonstrates a task and reporting dashboard with simulated workflow data.
 
-## Description
-An AI workflow automation system that takes raw CSV/JSON data, generates summaries, and drafts reports in clear English. Reduces manual reporting time from hours to minutes.
+## Status
 
-## Features
-- 🎯 **Smart Processing**: AI-powered data analysis
-- 📊 **Multiple Formats**: CSV, JSON, Excel support
-- ⚡ **Instant Reports**: Automated report generation
-- 📋 **Custom Templates**: Configurable for different clients
-- 📧Export Options**: PDF, email, and more
+**Browser-based portfolio demo.** The checked-in `script.js` uses local
+JavaScript, rules, templates or simulated responses. It does not call a hosted
+LLM API or run a trained local model.
 
-## Use Cases
-- Client reporting automation
-- Data summary generation
-- KPI dashboard updates
-- Business intelligence reports
-- Performance analytics
+There is no deployed scheduler, background worker or cloud workflow engine.
 
-## Technical Details
-- **Technology**: Python, AI APIs, Data Processing
-- **Architecture**: Cloud-based workflow engine
-- **Integration**: Compatible with Google Sheets, APIs
+## Try It Locally
 
-## Getting Started
-```bash
-git clone https://github.com/Thankswewin/task-automation.git
-cd task-automation
-pip install -r requirements.txt
-python main.py
-```
+1. Clone this repository.
+2. Open `index.html` in a modern browser.
+3. Use sample or non-sensitive inputs to explore the workflow.
+
+No npm or Python installation is required for this standalone demo.
+Some fonts or styles may load from external CDNs.
+
+## Repository Layout
+
+| File | Purpose |
+| --- | --- |
+| `index.html` | Interface and page markup |
+| `script.js` | Local workflow and demonstration logic |
+| `styles.css` | Styling |
+
+## Development
+
+A real model integration would be a separate implementation. Keep provider
+credentials on a backend, never in browser JavaScript, and add appropriate
+validation and tests before using the tool with customer data.
 
 ## Author
-**Philemon Ofotan** | GitHub: [@Thankswewin](https://github.com/Thankswewin) | Email: pheelymon@gmail.com
+
+[Philemon Ofotan](https://github.com/Thankswewin), founder of
+[Archyy Studio](https://archyy.live).
+
